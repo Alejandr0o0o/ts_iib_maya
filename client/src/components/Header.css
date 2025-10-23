@@ -1,0 +1,42 @@
+.main-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 40px;
+  /* Usando un verde olivo oscuro similar al de tus diseños */
+  background-color: #3e4a24;
+  color: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.logo a {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+}
+
+.main-nav ul {
+  display: flex;
+  list-style: none; /* Quita los puntos de la lista */
+  margin: 0;
+  padding: 0;
+}
+
+.main-nav li {
+  margin-left: 20px;
+}
+
+.main-nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 5px 0;
+  border-bottom: 2px solid transparent;
+  transition: border-bottom 0.2s;
+}
+
+.main-nav a:hover {
+  /* Efecto visual al pasar el mouse */
+  border-bottom: 2px solid white;
+}
