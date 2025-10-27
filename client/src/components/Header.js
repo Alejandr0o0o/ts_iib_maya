@@ -18,7 +18,7 @@ function Header() {
           <li><Link to="/">Catálogo</Link></li>
           {/* Dejamos listos los enlaces para futuras páginas */}
           {<li><Link to="/acerca">Acerca del Proyecto</Link></li>}
-          {/* <li><Link to="/contacto">Contactos</Link></li> */}
+          {<li><Link to="/contacto">Contactos</Link></li>}
         </ul>
       </nav>
     </header>

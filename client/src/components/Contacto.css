@@ -1,0 +1,50 @@
+.contacto-container {
+  padding: 20px 40px;
+  max-width: 600px; /* Un poco más angosto para el formulario */
+  margin: 20px auto;
+  text-align: center;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  margin-top: 30px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 1em;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box; /* Asegura que el padding no afecte el ancho */
+}
+
+.submit-btn {
+  padding: 12px 20px;
+  font-size: 1.1em;
+  font-weight: bold;
+  color: white;
+  /* Usamos el mismo verde del header */
+  background-color: #3e4a24;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.submit-btn:hover {
+  background-color: #5a6b36;
+}
