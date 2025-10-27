@@ -57,6 +57,23 @@ app.get('/api/plantas/:id', (req, res) => {
   });
 });
 
+app.get('/api/recetas/planta/:id', (req, res) => {
+  const { id } = req.params; // Capturamos el ID de la planta desde la URL
+  
+  // Esta consulta busca todas las recetas donde el 'id_planta_fk' coincida con el ID
+  const sql = 'SELECT * FROM recetas WHERE id_planta_fk = ?';
+
+  db.query(sql, [id], (err, data) => {
+    if (err) {
+      console.error("Error en la consulta de recetas:", err);
+      return res.status(500).json({ error: "Error interno del servidor" });
+    }
+    
+    // Devolvemos todas las recetas que encontramos (puede ser un array vacío y eso está bien)
+    return res.json(data);
+  });
+});
+
 // Bloque 5: Encender el servidor
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en http://localhost:${PORT}`);

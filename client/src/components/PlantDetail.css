@@ -1,0 +1,20 @@
+.plant-detail-container {
+  padding: 20px 40px; /* Más espacio a los lados */
+  max-width: 800px; /* Un ancho máximo para que no sea tan ancho en pantallas grandes */
+  margin: 0 auto; /* Centra el contenido */
+  text-align: left; /* Alinea el texto a la izquierda */
+}
+
+.recipe-card {
+  border: 1px solid #eee;
+  padding: 16px 24px; /* Un poco más de padding */
+  margin: 20px 0;
+  border-radius: 8px;
+  background: #f9f9f9;
+}
+
+/* Esta es la corrección para los ingredientes */
+.recipe-card ul {
+  list-style-position: inside; /* Mueve los puntos adentro */
+  padding-left: 0; /* Quita el padding por defecto */
+}

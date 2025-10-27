@@ -13,7 +13,6 @@ function PlantCard({ planta }) {
           alt={`Imagen de ${planta.nombre_comun}`} 
         />
         <h3>{planta.nombre_comun}</h3>
-        <p>{planta.nombre_maya}</p>
       </div>
     </Link>
   );
