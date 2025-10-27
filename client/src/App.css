@@ -50,3 +50,21 @@
   font-size: 2.5em;
   margin: 20px 0;
 }
+
+.filtro-container {
+  width: 100%; /* Ocupa todo el ancho */
+  text-align: center; /* Centra el contenido */
+  margin-bottom: 20px;
+}
+
+.filtro-container label {
+  font-size: 1.1em;
+  margin-right: 10px;
+}
+
+.filtro-container select {
+  font-size: 1em;
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}

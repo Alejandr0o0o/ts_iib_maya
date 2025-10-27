@@ -6,32 +6,71 @@ import Header from './components/Header';
 import './App.css';
 
 function App() {
-  // 1. Creamos un lugar para guardar las plantas que vienen del servidor
   const [plantas, setPlantas] = useState([]);
+  
+  // 1. Cambiamos el estado. Ahora guardará solo las categorías
+  const [categorias, setCategorias] = useState([]);
+  const [filtroActual, setFiltroActual] = useState('0'); // '0' será "Todos"
 
-  // 2. Este código se ejecuta solo una vez, cuando el componente se carga por primera vez
+  // 2. Este useEffect AHORA BUSCA de la nueva ruta /api/categorias
   useEffect(() => {
-    // Hacemos la petición a nuestro servidor (la cocina)
-    fetch('http://localhost:5000/api/plantas')
-      .then(response => response.json()) // Convertimos la respuesta a formato JSON
-      .then(data => setPlantas(data)) // Guardamos los datos recibidos en nuestro "lugar" (estado)
-      .catch(error => console.error('Error al obtener los datos:', error));
-  }, []); // El array vacío [] asegura que esto se ejecute solo una vez
+    fetch('http://localhost:5000/api/categorias')
+      .then(res => res.json())
+      .then(data => setCategorias(data))
+      .catch(err => console.error("Error al obtener categorías:", err));
+  }, []);
+
+  // 3. Este useEffect AHORA FILTRA por el nombre de la categoría
+  useEffect(() => {
+    let url;
+    if (filtroActual === '0') {
+      url = 'http://localhost:5000/api/plantas';
+    } else {
+      // Usamos la nueva ruta y le pasamos el nombre (ej. "Cutáneos")
+      url = `http://localhost:5000/api/plantas/categoria/${filtroActual}`;
+    }
+
+    fetch(url)
+      .then(response => response.json())
+      .then(data => setPlantas(data))
+      .catch(error => console.error('Error al obtener las plantas:', error));
+  }, [filtroActual]); // Se re-ejecuta cuando el filtro cambia
+
+  function handleFiltroChange(event) {
+    setFiltroActual(event.target.value);
+  }
 
   return (
     <div className="App">
-       <Header/>
-      {/* 2. Define tus rutas aquí */}
+      <Header /> 
+      
       <Routes>
-        {/* Ruta para la página principal (el catálogo) */}
         <Route path="/" element={
           <main className="catalog-container">
+            <h1 className="catalog-title">Catálogo</h1>
+            
+            <div className="filtro-container">
+              <label htmlFor="filtro-categoria">Filtrar por Categoría: </label>
+              <select id="filtro-categoria" value={filtroActual} onChange={handleFiltroChange}>
+                <option value="0">-- Todas las categorías --</option>
+                
+                {/* 4. Llenamos el dropdown con las categorías únicas */}
+                {categorias.map((cat, index) => (
+                  // El valor y el texto ahora son cat.categoria
+                  <option key={index} value={cat.categoria}>
+                    {cat.categoria}
+                  </option>
+                ))}
+              </select>
+            </div>
+            
             {plantas.map(planta => (
               <PlantCard key={planta.id_planta} planta={planta} />
             ))}
           </main>
         } />
-        { <Route path="/planta/:id" element={<PlantDetail />} /> }
+
+        <Route path="/planta/:id" element={<PlantDetail />} />
       </Routes>
     </div>
   );

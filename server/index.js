@@ -74,6 +74,49 @@ app.get('/api/recetas/planta/:id', (req, res) => {
   });
 });
 
+//
+// --- RUTA PARA OBTENER LAS CATEGORÍAS ÚNICAS ---
+//
+app.get('/api/categorias', (req, res) => {
+  // 'SELECT DISTINCT' es la clave aquí
+  const sql = 'SELECT DISTINCT categoria FROM padecimientos ORDER BY categoria ASC';
+  
+  db.query(sql, (err, data) => {
+    if (err) {
+      console.error("Error en la consulta de categorías:", err);
+      return res.status(500).json({ error: "Error interno del servidor" });
+    }
+    // 'data' será un array como: [{categoria: 'Cutáneos'}, {categoria: 'Digestivos'}, ...]
+    return res.json(data);
+  });
+});
+
+//
+// --- RUTA PARA OBTENER PLANTAS POR NOMBRE DE CATEGORÍA ---
+//
+app.get('/api/plantas/categoria/:nombre', (req, res) => {
+  // Usamos el nombre (que puede tener espacios), no un ID
+  const nombreCategoria = req.params.nombre; 
+
+  // Este JOIN triple conecta todo y filtra por el texto de la categoría.
+  // Usamos 'GROUP BY' para asegurar que no salgan plantas duplicadas.
+  const sql = `
+    SELECT p.* FROM plantas p
+    JOIN plantas_padecimientos pp ON p.id_planta = pp.id_planta_fk
+    JOIN padecimientos pad ON pp.id_padecimiento_fk = pad.id_padecimiento
+    WHERE pad.categoria = ?
+    GROUP BY p.id_planta
+  `;
+
+  db.query(sql, [nombreCategoria], (err, data) => {
+    if (err) {
+      console.error("Error en la consulta de plantas por categoría:", err);
+      return res.status(500).json({ error: "Error interno del servidor" });
+    }
+    return res.json(data);
+  });
+});
+
 // Bloque 5: Encender el servidor
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en http://localhost:${PORT}`);
