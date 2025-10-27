@@ -1,0 +1,22 @@
+.acerca-container {
+  padding: 20px 40px;
+  max-width: 800px; /* Ancho máximo para legibilidad */
+  margin: 20px auto; /* Centra el contenedor */
+  text-align: left;
+  line-height: 1.6; /* Separa las líneas de texto */
+}
+
+.acerca-container h1 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.acerca-container h2 {
+  border-bottom: 2px solid #eee;
+  padding-bottom: 5px;
+  margin-top: 25px;
+}
+
+.acerca-container p {
+  margin-bottom: 15px;
+}

@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import PlantCard from './components/PlantCard';
 import PlantDetail from './components/PlantDetail';
 import Header from './components/Header';
+import Acerca from './components/Acerca';
 import './App.css';
 
 function App() {
@@ -71,6 +72,7 @@ function App() {
         } />
 
         <Route path="/planta/:id" element={<PlantDetail />} />
+        <Route path="/acerca" element={<Acerca />} />
       </Routes>
     </div>
   );
